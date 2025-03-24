@@ -4,5 +4,14 @@
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-prettier": "^5.2.4",
     "prettier": "^3.5.3"
-  }
+  },
+  "scripts": {
+    "prettify": "npx prettier --write '**/*.{js,jsx}'"
+  },
+  "name": "practice",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/athulmurali/practice.git",
+  "author": "Athul Muralidharan <athulmurali@gmail.com>",
+  "license": "MIT"
 }
