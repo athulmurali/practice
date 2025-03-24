@@ -6,7 +6,7 @@ const camelToSnakeCase = str => str.replace(/[A-Z]/g, letter => `_${letter.toLow
  * 
  * @param {Array<Object> | Object} obj
  */
-function convertCamelToSnakeCase(obj) {
+function convertCamelKeyToSnakeCase(obj) {
 
     if (obj instanceof Object)
     {
@@ -35,5 +35,20 @@ const obj = {
     "state": "IL"
     }]
     }
-const result = convertCamelToSnakeCase(obj,"obj");
+const result = convertCamelKeyToSnakeCase(obj,"obj");
 console.log(result);
+
+
+const testCases = [
+    {
+        input : {
+
+        },
+        output:{
+
+        }
+    },
+
+]
+
+testCases.every(({input}) => console.log(convertCamelKeyToSnakeCase(input)))
