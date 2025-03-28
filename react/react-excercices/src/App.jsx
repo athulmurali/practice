@@ -3,24 +3,26 @@ import UserList from "./UserList/UserList";
 import { Header } from "./Header";
 import Footer from "../src/Footer";
 import CardPage from "./CardList";
+import React from "react";
 
+const projects = {
+  UserList: <UserList />,
+  CardPage: <CardPage />,
+};
+
+const ProjectSelector = ({ projects, value, setProject }) => {
+  return (
+    <select value={value} onChange={(e) => setProject(e?.target?.value)}>
+      {projects.map((pro) => (
+        <option value={pro} label={pro} />
+      ))}
+    </select>
+  );
+};
 
 function App() {
-
-  const projects = {
-    "UserList": <UserList/>,
-    "CardPage": <CardPage/>
-  }
-  const [project, setProject] = useState(Object.keys(projects).values().next())
-
-
-  const ProjectSelector = ({projects})=>{
-    return <select defaultValue={project}>
-      {projects.map(pro=>(<option value={pro} label={pro}/>)) }
-  
-    </select>
-  }
-  
+  const getProjectNames = () => Object.keys(projects).values();
+  const [project, setProject] = React.useState(getProjectNames().next().value);
 
   return (
     <div
@@ -30,7 +32,11 @@ function App() {
       }}
     >
       <Header />
-      <ProjectSelector/>
+      <ProjectSelector
+        value={project}
+        projects={getProjectNames()}
+        setProject={setProject}
+      />
       {projects[project]}
       <Footer />
     </div>

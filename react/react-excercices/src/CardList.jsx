@@ -48,7 +48,7 @@ const CardPage = () => {
         overflowY: "hidden",
         gap: "2rem",
         fontFamily: "system-ui, Avenir, Helvetica, Arial, sans-serif",
-        background: "yellow"
+        background: "yellow",
       }}
     >
       {cards.map(({ title, body, style, id }) => (
