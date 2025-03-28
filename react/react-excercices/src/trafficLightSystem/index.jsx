@@ -8,7 +8,6 @@ const COLORS = {
   Black: "#000000",
 };
 
-
 const TRAFFIC_LIGHTS_CONTAINER_STYLE = {
   display: "flex",
   flexDirection: "column",
@@ -44,50 +43,51 @@ const TrafficLightsContainer = () => {
   const [color, setColor] = React.useState(COLORS.Green);
   const [shouldLoop, setShouldLoop] = React.useState(false);
 
-  const toggleShouldLoop=()=>{
+  const toggleShouldLoop = () => {
     clearTimeout(currentTimerId);
-    setShouldLoop(!shouldLoop)
-  }
+    setShouldLoop(!shouldLoop);
+  };
   const COLOR_TIMING = new Map([
     [COLORS.Red, 5000],
     [COLORS.Yellow, 2000],
-    [COLORS.Green, 5000]
+    [COLORS.Green, 5000],
   ]);
-  
-  const ORDER = [COLORS.Red, COLORS.Yellow, COLORS.Green]
 
-  const  currentTimerId = React.useRef(-1);
+  const ORDER = [COLORS.Red, COLORS.Yellow, COLORS.Green];
 
-  const getNextColor = ()=>{
-    return  ORDER[(ORDER.indexOf(color) + 1) % ORDER.length ]
-  }
+  const currentTimerId = React.useRef(-1);
 
-//   const loopLights=()=>{
-//     clearTimeout(currentTimerId.current);
-//     const nextColor = getNextColor()
-//     console.log("nextColor: ", nextColor, "current color : ",color)
-//     const nextColorTiming = COLOR_TIMING.get(nextColor);
-//     setColor(nextColor)
-//     console.log("next color timing", nextColorTiming)
-//     currentTimerId.current =  setTimeout(loopLights, nextColorTiming)
-//   }
+  const getNextColor = () => {
+    return ORDER[(ORDER.indexOf(color) + 1) % ORDER.length];
+  };
 
-  React.useEffect(()=>{
-    if (shouldLoop)
-       {
-        clearTimeout(currentTimerId.current);
-        const nextColor = getNextColor()
-        console.log("nextColor: ", nextColor, "current color : ",color)
-        const nextColorTiming = COLOR_TIMING.get(color);
-        
-        
-        console.log("next color timing", nextColorTiming)
-        currentTimerId.current =  setTimeout(()=>setColor(nextColor), nextColorTiming)
-       }
-  },[color, shouldLoop])
+  //   const loopLights=()=>{
+  //     clearTimeout(currentTimerId.current);
+  //     const nextColor = getNextColor()
+  //     console.log("nextColor: ", nextColor, "current color : ",color)
+  //     const nextColorTiming = COLOR_TIMING.get(nextColor);
+  //     setColor(nextColor)
+  //     console.log("next color timing", nextColorTiming)
+  //     currentTimerId.current =  setTimeout(loopLights, nextColorTiming)
+  //   }
+
+  React.useEffect(() => {
+    if (shouldLoop) {
+      clearTimeout(currentTimerId.current);
+      const nextColor = getNextColor();
+      console.log("nextColor: ", nextColor, "current color : ", color);
+      const nextColorTiming = COLOR_TIMING.get(color);
+
+      console.log("next color timing", nextColorTiming);
+      currentTimerId.current = setTimeout(
+        () => setColor(nextColor),
+        nextColorTiming,
+      );
+    }
+  }, [color, shouldLoop]);
   return (
     <div style={TRAFFIC_LIGHTS_CONTAINER_STYLE} autoFocus={true}>
-        <button onClick={toggleShouldLoop}>AUTO</button>
+      <button onClick={toggleShouldLoop}>AUTO</button>
       <TrafficLight
         isOn={color === COLORS.Red}
         color={COLORS.Red}
@@ -121,7 +121,7 @@ const TRAFFIC_LIGHT_STYLE = {
   cursor: "pointer",
 };
 
-const TrafficLight = ({ color, isOn, onClickHandler , toggleAuto }) => {
+const TrafficLight = ({ color, isOn, onClickHandler, toggleAuto }) => {
   return (
     <button
       style={{
@@ -129,9 +129,9 @@ const TrafficLight = ({ color, isOn, onClickHandler , toggleAuto }) => {
         backgroundColor: isOn ? color : COLORS.Gray,
       }}
       onClick={(e) => {
-        toggleAuto()
-        onClickHandler(color)
-       } }
+        toggleAuto();
+        onClickHandler(color);
+      }}
     />
   );
 };
