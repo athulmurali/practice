@@ -56,7 +56,7 @@ const UserList = () => {
   return (
     <div>
       <h1>Dev List 1</h1>
-      <Suspense fallback={<div> {console.log("~hiiii")}Loading...</div>}>
+      <Suspense fallback={<div> Loading...</div>}>
         {users.length > 3
           ? users.map((user, ind) => <UserInfoRow key={ind} {...user} />)
           : null}
