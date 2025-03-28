@@ -47,21 +47,31 @@ const UserList = () => {
           img: medium,
         }),
       );
-      console.log("~1", processedUsers);
       setUsers(processedUsers);
     };
 
     getUsers();
   }, []);
   return (
-    <div>
-      <h1>Dev List 1</h1>
-      <Suspense fallback={<div> Loading...</div>}>
-        {users.length > 3
-          ? users.map((user, ind) => <UserInfoRow key={ind} {...user} />)
-          : null}
-      </Suspense>
-    </div>
+    <>
+      <h1> Super cool devs!</h1>
+      <div
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          display: "flex",
+          flexDirection: "column",
+          minWidth: "800px",
+          gap: "4px",
+        }}
+      >
+        <Suspense fallback={<div> Loading...</div>}>
+          {users.length > 3
+            ? users.map((user, ind) => <UserInfoRow key={ind} {...user} />)
+            : null}
+        </Suspense>
+      </div>
+    </>
   );
 };
 

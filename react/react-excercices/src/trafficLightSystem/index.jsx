@@ -75,9 +75,9 @@ const TrafficLightsContainer = () => {
     if (shouldLoop) {
       clearTimeout(currentTimerId.current);
       const nextColor = getNextColor();
-    //   console.log("nextColor: ", nextColor, "current color : ", color);
+      //   console.log("nextColor: ", nextColor, "current color : ", color);
       const nextColorTiming = COLOR_TIMING.get(color);
-    //   console.log("next color timing", nextColorTiming);
+      //   console.log("next color timing", nextColorTiming);
       currentTimerId.current = setTimeout(
         () => setColor(nextColor),
         nextColorTiming,

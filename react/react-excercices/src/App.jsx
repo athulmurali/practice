@@ -2,7 +2,7 @@ import "./App.css";
 import UserList from "./UserList/UserList";
 import { Header } from "./Header";
 import Footer from "../src/Footer";
-import CardPage from "./CardList";
+import CardPage from "./cardsPage/CardList";
 import TrafficLightSystem from "./trafficLightSystem";
 import ProjectSelector from "./ProjectSelector";
 import React from "react";

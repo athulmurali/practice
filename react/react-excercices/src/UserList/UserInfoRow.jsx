@@ -5,7 +5,12 @@ const style = {
   flexDirection: "row",
   justifyContent: "space-between",
   gap: "10px",
-  backgroundColor: "yellow",
+  backgroundColor: "gray",
+  borderRadius: "10px",
+  minWidth: "600px",
+  alignItems: "center",
+  boxShadow:
+    "2px 2px 5px rgba(230, 230, 230, 0.45), 0px 0px 0px rgba(230, 230, 230, 0.45), 0px 0px 0px rgba(230, 230, 230, 0.45)",
 };
 
 const UserInfoRow = ({ name, img, email }) => {
