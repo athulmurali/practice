@@ -3,12 +3,14 @@ import UserList from "./UserList/UserList";
 import { Header } from "./Header";
 import Footer from "../src/Footer";
 import CardPage from "./CardList";
+import TrafficLightSystem from "./trafficLightSystem";
 import ProjectSelector from "./ProjectSelector";
 import React from "react";
 
 const projects = {
   UserList: <UserList />,
   CardPage: <CardPage />,
+  TrafficLightSystem: <TrafficLightSystem />,
 };
 
 function App() {
