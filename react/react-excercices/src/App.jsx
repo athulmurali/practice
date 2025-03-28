@@ -3,21 +3,12 @@ import UserList from "./UserList/UserList";
 import { Header } from "./Header";
 import Footer from "../src/Footer";
 import CardPage from "./CardList";
+import ProjectSelector from "./ProjectSelector";
 import React from "react";
 
 const projects = {
   UserList: <UserList />,
   CardPage: <CardPage />,
-};
-
-const ProjectSelector = ({ projects, value, setProject }) => {
-  return (
-    <select value={value} onChange={(e) => setProject(e?.target?.value)}>
-      {projects.map((pro) => (
-        <option value={pro} label={pro} />
-      ))}
-    </select>
-  );
 };
 
 function App() {
