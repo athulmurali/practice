@@ -37,20 +37,20 @@ const UserList = () => {
     }
   };
 
-  const getUsers = async () => {
-    const usersFetched = await fetchData();
-    const processedUsers = usersFetched.results.map(
-      ({ name, email, picture: { medium } }) => ({
-        name: `${name.first} ${name.last}`,
-        email,
-        img: medium,
-      }),
-    );
-    console.log("~1", processedUsers);
-    setUsers(processedUsers);
-  };
-
   React.useEffect(() => {
+    const getUsers = async () => {
+      const usersFetched = await fetchData();
+      const processedUsers = usersFetched.results.map(
+        ({ name, email, picture: { medium } }) => ({
+          name: `${name.first} ${name.last}`,
+          email,
+          img: medium,
+        }),
+      );
+      console.log("~1", processedUsers);
+      setUsers(processedUsers);
+    };
+
     getUsers();
   }, []);
   return (
