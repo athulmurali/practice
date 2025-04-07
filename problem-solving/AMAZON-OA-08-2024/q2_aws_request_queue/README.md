@@ -1,102 +1,108 @@
-Absolutely! Here's the **Markdown version** of **Code Question 2**, including a placeholder for the visual chart. If you'd like, I can also recreate the chart as ASCII or embed a markdown image link if you upload the chart separately.
+## 2. Code Question 2
+
+Amazon Web Services (AWS) is a cloud computing platform with multiple servers. One of the servers is assigned to serve customer requests. There are n customer requests placed sequentially in a queue, where the iᵗʰ request has a maximum waiting time (denoted by wait[i]). That is, if the iᵗʰ request is not served within wait[i] seconds, then the request expires and it is removed from the queue.
+
+The server processes the requests following the First In First Out (FIFO) principle. The iᵗʰ request is placed in position i and the jᵗʰ request is served last. At each second, the first request in the queue is processed. At the next second, the processed request and any expired requests are removed from the queue.
+
+Given the maximum waiting time of each request denoted by the array wait, find the number of requests present in the queue at every second until it is empty.
+
+### Note:
+
+- If a request is served at some time instant, it will be counted for that instant and is removed at the next instant.
+- The first request is processed at time = 0. A request expires without being processed when time ≥ wait[i]. It must be processed while time < wait[i]. See the example below for clarity.
+- The initial queue represents all requests at time 0 in the order they must be processed.
 
 ---
 
-# 📌 Code Question 2 – AWS Request Queue Timeout
+### Example:
 
-## Problem Description
+The number of requests is n = 4 and their maximum wait times are wait = [2, 2, 3, 1].
 
-Amazon Web Services (AWS) is a cloud computing platform with multiple servers. One of the servers is assigned to serve customer requests.
+- time = 0 seconds, the 1st request is served. The number of requests in the queue is 4. queue = [2, 2, 3, 1]
+- time = 1 second, request 1 is removed because it is processed, request 2 is served. request 4 is removed because time = 1 and wait[3] = 1, which means it has already expired. The number of requests in the queue is 2. queue = [2, 3]
+- time = 2 seconds, request 2 is removed because it is processed, request 3 is served. The number of requests in the queue is 1. queue = [3]
+- time = 3 seconds, request 3 is removed because it is processed. The number of requests in the queue is 0. queue = []
 
-There is a **queue** of customer requests placed **sequentially**.  
-Each request `i` has a **maximum waiting time** `wait[i]` (in seconds).
-
-### Request Processing Rule:
-
-- If the `i-th` request is **not** served within `wait[i]` seconds, it **expires** and is **removed** from the queue.
-- The server processes requests **one at a time** in **FIFO order** (First-In-First-Out).
-- The server takes **1 second** to serve each request.
-- At each second:
-  - If the request at the **front** is still valid (`wait[i] > time`), it is served.
-  - Otherwise, it is discarded.
+The answer is [4, 2, 1, 0]
 
 ---
 
-## 📝 Notes
+### Function Description
 
-- If a request is **served at time `t`**, it is **counted** and removed at the **next instant**.
-- The **first** request is processed at **time = 0**.
-- A request **expires** without being served if `time ≥ wait[i]`.
-- All requests **start at time 0**.
+Complete the function findRequestsInQueue in the editor below.
+
+findRequestsInQueue has the following parameter(s):
+
+- int wait[n]: the maximum waiting time of each request
+
+Returns
+
+- int[]: the number of requests in the queue at each instant until the queue becomes empty.
 
 ---
 
-## 🎯 Objective
+### Constraints
 
-Given an array `wait[]` of size `n`, return the **number of requests** served before the queue becomes empty.
+- 1 ≤ n ≤ 10⁵  
+- 1 ≤ wait[i] ≤ 10⁹
 
 ---
 
-## 🧪 Example
+### Input Format For Custom Testing
 
-### Input
+#### Sample Case 0
 
-```text
-n = 4  
-wait = [2, 2, 3, 1]
+**Sample Input for Custom Testing**
+
 ```
-
-### Steps
-
-| Time | Queue         | Action                        | Served |
-|------|---------------|-------------------------------|--------|
-| 0    | [2, 2, 3, 1]  | Serve 1st request (wait=2)     | Yes    |
-| 1    | [2, 3, 1]     | Serve 2nd request (wait=2)     | Yes    |
-| 2    | [3, 1]        | Serve 3rd request (wait=3)     | Yes    |
-| 3    | [1]           | **Too late** (wait=1), skip    | No     |
-
-### ✅ Output
-
-```text
+STDIN           FUNCTION
+-----           --------
+4               → wait[] size n = 4
+2               → wait = [2, 2, 3, 1]
+2
 3
+1
+```
+
+**Sample Output**
+
+```
+4
+2
+1
+0
 ```
 
 ---
 
-## ✍️ Function Signature
+#### Sample Case 1
 
-```python
-def findRequestsInQueue(wait: List[int]) -> int:
-    pass
-```
-
-### Parameters
-
-- `wait`: List[int] — An array of integers where `wait[i]` is the maximum time the i-th request can wait.
-
-### Returns
-
-- Integer — the number of requests that are successfully served.
-
----
-
-## 📊 Visual Representation (From the Original Prompt)
-
-You can recreate the visual like this:
+**Sample Input for Custom Testing**
 
 ```
-Initial Queue: [2, 2, 3, 1]
-
-Time 0: Serve wait=2 ✅ → Queue: [2, 3, 1]
-Time 1: Serve wait=2 ✅ → Queue: [3, 1]
-Time 2: Serve wait=3 ✅ → Queue: [1]
-Time 3: wait=1 expired ❌ → Queue: []
+STDIN           FUNCTION
+-----           --------
+5               → wait[] size n = 5
+2               → wait = [2, 4, 1, 3, 1]
+4
+1
+3
+1
 ```
 
-Alternatively, you can use a screenshot from the image for full visual fidelity if you're rendering markdown in a system that supports it (e.g., GitHub):
+**Sample Output**
 
-```markdown
-![AWS Queue Chart](./aws_queue_chart.png)
+```
+5
+3
+2
+1
+0
 ```
 
-Let me know if you’d like an ASCII-style diagram or if you’d like me to regenerate the chart graphically!
+**Explanation**
+
+- time = 0 seconds, request 1 is served. queue = [2, 4, 1, 3, 1], count = 5  
+- time = 1 second, request 1 is removed (served), request 2 is served, requests 3 and 5 are removed (expired). queue = [4, 3], count = 3  
+- time = 2 seconds, request 2 is removed, request 4 is served. queue = [3], count = 2  
+- time = 3 seconds, request 4 is removed (served). queue = [], count = 0  

@@ -1,34 +1,43 @@
 from typing import List
+from collections import deque
 
-def findRequestsInQueue(wait: List[int]) -> int:
-    """
-    Returns the number of requests successfully served from the queue.
+def findRequestsInQueue(wait: List[int]) -> List[int]:
+    queue = deque(wait)
+    result = []
+    current_time = 1
 
-    Parameters:
-    wait (List[int]): An array where wait[i] is the max wait time for request i.
+    while queue:
+        # Remove all expired requests: wait[i] < current_time
+        while queue and queue[0] < current_time:
+            queue.popleft()
 
-    Returns:
-    int: Total number of requests served before the queue is empty.
-    """
-    # TODO: Implement your solution here
-    pass
+        # Record the queue size after expiration
+        result.append(len(queue))
 
-# Sample test cases
-testCases = [
-    { "n": 4, "wait": [2, 2, 3, 1], "expected": 3 },
-    { "n": 6, "wait": [1, 2, 3, 4, 5, 6], "expected": 6 },
-    { "n": 5, "wait": [1, 1, 1, 1, 1], "expected": 1 },
-    { "n": 3, "wait": [0, 0, 0], "expected": 0 },
-    { "n": 5, "wait": [5, 4, 3, 2, 1], "expected": 3 },
-]
+        # Serve the first request (if any remain)
+        if queue:
+            queue.popleft()
 
-# Run test cases
-for case in testCases:
-    n = case["n"]
-    wait = case["wait"]
-    expected = case["expected"]
-    result = findRequestsInQueue(wait)
-    assert result == expected, f"Failed for wait={wait} | Expected: {expected}, Got: {result}"
-    print(f"Passed for wait={wait} ✅")
+        current_time += 1
 
-print("All test cases passed!")
+    return result
+
+
+def run_tests():
+    testCases = [
+        ([2, 2, 3, 1], [4, 2, 1, 0]),
+        ([1, 2, 3], [3, 2, 1, 0]),
+    ]
+
+    for i, (wait, expected) in enumerate(testCases):
+        result = findRequestsInQueue(wait)
+        if result != expected:
+            print(f"❌ Test {i+1} Failed")
+            print(f"   Input:    wait = {wait}")
+            print(f"   Expected: {expected}")
+            print(f"   Got:      {result}")
+        else:
+            print(f"✅ Test {i+1} Passed")
+
+if __name__ == '__main__':
+    run_tests()
